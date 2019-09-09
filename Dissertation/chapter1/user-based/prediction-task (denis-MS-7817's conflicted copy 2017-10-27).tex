@@ -1,0 +1,39 @@
+
+\subsubsection{Задача прогнозирования}
+Подобно задаче $topN$, для решения задачи прогнозирования \cite{cf-expert,
+coscial-rec-survey, cfrs, toward,rs-handbook, user-item-cf,rs-cf}
+строится кластер соседей, центром которого является активный пользователь
+$u_a$, однако в кластер входят не только те пользователи, между которыми
+и активным выполняется отношение близости, но и такие, которые оценили
+прогнозируемый объект $i_{\bot}$:
+$\nup = \{u: u_a \ru u \wedge \rho(u,i_{\bot}) \in P_0\}$. Такое дополнительное
+условие накладывается для того, чтобы по известным $\rho(u, i_{\bot}), u \in \nup$
+определить неизвестную $\rho(u,i_{\bot})$.
+Следуя утверждению СОМ (\ref{assertSRS1}), значение $|\rho(u_a,i_{\bot}) -
+\rho(u,i_{\bot})| \le
+\varepsilon_p, u \in \nup$.
+Для того, чтобы рассчитать прогнозную оценку,
+вычисляется значение некоторой прогнозной функции $f_p$
+от оценок, поставленных прогнозируемому объекту соседями:
+\begin{equation}
+  \rh(u_a,i_{\bot}) = f_p\{ \rho(u,i_{\bot}): u \in \nup \})
+\end{equation}
+
+\begin{figure}[h]
+	\label{p-solve-srs}
+	\begin{algorithm}
+		\caption{Стандартный алгоритм решения задачи прогнозирования неизвестного значения
+		$\rho(u_a,i_{\bot})$ СОМ}
+		\begin{algorithmic}[1]
+			\State $k = 0$
+			\State $\nup \gets \varnothing$
+			\For {$u \gets 1 \to |U|$}
+			\If{ $(u_a \ru u) \wedge (\exists \rho(u, i_{\bot})) \wedge (k < M)$
+			} \Comment{$M$ --- максимальное число пользователей в кластере}
+			\State $\nup \gets \nup \bigcup \{ u \}$
+			\EndIf
+			\EndFor
+			\State $\rho(u_a,i_{\bot}) \gets f_p\{ \rho(u,i_{\bot}) \in \nup \})$
+		\end{algorithmic}
+	\end{algorithm}
+\end{figure}

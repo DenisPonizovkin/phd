@@ -1,0 +1,62 @@
+
+\subsubsection{Функции вычисления прогнозной оценки}
+Приведем примеры распространенных функций $f_p$, которые используются для
+вычисления значения прогнозной функции по значениям $\rho(u, i), u \in \nup$.
+\begin{itemize}
+  \item Среднее  \cite{surveyCf}:
+  \begin{equation}
+	\label{middle-pred}
+    \frac{1}{|\nup|} \cdot \sum \limits_{u \in \nup} \rho(u,i_{\bot}).
+  \end{equation}
+  \item Среднее взвешенное \cite{surveyCf}:
+  \begin{equation}
+	  \label{weighted-pred}
+    \overline{\rho^a} +
+    \frac{ \sum \limits_{u \in \nup} \du(u_a,u) \cdot (\rho(u,i_{\bot}) -
+	  \overline{\rho^u}) }
+{ \sum \limits_{u \in \nup} | \du(u_a,u) | }
+  \end{equation}
+  $\overline{\rho^a}$ --- среднее значение близости активного пользователя,
+		$\overline{\rho^u}$ --- среднее значение близости пользователя $u$.
+Вычитание средней оценки близости призвано устранить эффект,
+который накладывается от характера пользователя:
+		лояльные пользователи ставят оценки близости не ниже определенной,
+строгие пользователи --- наоборот \cite{norm, rs-handbook}.
+
+Приведенные способы вычисления прогнозной оценки являются распространенными, но не единственными.
+К примеру, компания Ringo \cite{ringo} не использовала в своей системе веса,
+а среднее значение меры сходства соседей. Однако
+метод среднего взвешенного является не только простым и распространенным,
+но и согласуется с
+теорией общественного выбора, ее обоснованиями человеческого поведения, ---
+первичными принципами коллаборативной фильтрации  \cite{cfrs,bellcore}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Меры сходства}
+Приведем примеры распространенных функций, которые используются в качестве меры
+сходства.
+\begin{itemize}
+\item Коэффициент корреляции Пирсона\label{pearson}:
+\begin{equation}
+	\du(u,v)\frac{\sum \limits_{i \in I_{\bigcap}}(\rho(u,i) - \overline{\rho}^u) \cdot
+	(\rho(v,i) - \overline{\rho}^v)}
+                {\sqrt{\sum \limits_{i \in I^u}(\rho(u,i) - \overline{\rho})^u \cdot
+                    \sum \limits_{i \in I^v}(\rho(v,i) - \overline{\rho}^v)^2}}
+\end{equation}
+\begin{equation*}
+	I^a = \{i: (i, \rho(a,i)) \in P^a_0\}, a \in \{u,v\},P^a_0 = \{\rho(a, i_0)\}
+\end{equation*}
+\begin{equation*}
+	I_{\bigcap} = I^u \bigcap I^v
+\end{equation*}
+\item Косинус угла между контентами.
+	Для применения этой меры сходства необходимо представлять
+контенты как элементы векторного пространства, в котором координата
+		соответствует объекту и равна нулю, если пользователь не оценивал
+		данный объект.
+\begin{equation}
+cos(\angle(u,v) = \frac{\sum \limits_{ i \in I_{\bigcap} } \rho(u,i) \cdot \rho(v,i)}{
+\sqrt{ \sum \limits_{i \in  I^u } (\rho(u,i))^2 } \cdot \sqrt{ \sum \limits_{ i \in I^v} (\rho(u,i))^2 }},
+\end{equation}
+\end{itemize}

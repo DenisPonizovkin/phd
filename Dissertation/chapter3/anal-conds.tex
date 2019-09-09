@@ -1,0 +1,232 @@
+\section{Необходимые и достаточные условия эффективности решений объектно-ориентированных моделей}
+Рассмотрим в данном разделе, при каких условиях схемы решений коллаборативных РС дают 
+эффективные решения.
+\subsection{Необходимое условие эффективности решения задачи $\top$}
+\begin{assert}
+Необходимым условием эффективности решения задачи $\top$ является выполнение транзитивности отношения сходства 
+объектов на множестве $T^a_0 \bigcup T^a_1 \bigcup T^a_{\times}$:
+\begin{equation}
+i_0 \mathit{R} i_{1} \wedge i_0 \mathit{R} i_{\times}  \Rightarrow i_{1} \mathit{R} i_{\times}
+\end{equation}
+\end{assert}
+Покажем, что $(\mathcal{E}_{\top} \le \epsilon_1) \Rightarrow (i_0 \mathit{R} i_{1} \wedge i_0 \mathit{R} i_{\times}  
+\Rightarrow i_{1} \mathit{R} i_{\times})$
+
+\begin{myproof}
+Как говорилось выше, решением задачи $\top$ является $T^a_{1} = \{(i_{1},\delta_0(a,i_{1})\}, i_{1} \in \mathcal{N}_{\top}$. 
+\end{myproof}
+
+Отношение $i_0 \mathit{R} i_{\times}$ является отношением базового утверждения модели\label{assertORS1}, описывающего свойства входных данных.
+Для любого $i_0 \in T^a_0$ найдется такой объект тестового множества $i_{\times}$, что $i_0 \mathit{R} i_{\times}$.
+
+По способу задания отношения сходства между объектом и центром кластера соседей $I_0$, выполняется, что 
+$\forall$ $i_{1}$ $\exists$ $i_0 \in I_0: i_0 \mathit{R} i_{1}$, поэтому по построению решения верно, 
+что $i_0 \mathit{R} i_{1}$ для всех $i_1$.
+
+Так как решение $T^a_{1}$ эффективно, то есть $\exists$ $T'_1 \subset T^a_1$, $T'_1 = \{ (i_{1},\delta_0(a,i_{1}) : \exists$ $i_{\times}, i_{1} \mathit{R} i_{\times} \}$, $|T'_1| = K \ge N \cdot (1 - \epsilon_1)$. 
+
+Таким образом, получаем, что если решение эффективно, то выполняется транзитивность отношения сходства для $i_1 \in T'_1$. 
+Чем меньше число $K$, тем меньше раз выполняется транзитивность отношения сходства и тем решение хуже. 
+В приближении к идеальному решению при $\epsilon_1 = 0$, решение будет максимально 
+эффективно и транзитивность будет выполняться для всех $i_1$.
+
+\subsection{Достаточное условие эффективности решения задачи $\top$}
+\begin{assert}
+Достаточным условием эффективности решения задачи $\top$ является выполнение транзитивности отношения сходства объектов на множестве $I$
+\end{assert}
+Покажем, что $(i_0 \mathit{R} i_{1} \wedge i_0 \mathit{R} i_{\times}  
+\Rightarrow i_{1} \mathit{R} i_{\times}) \Rightarrow (\mathcal{E}_{\top} \le \epsilon_0)$
+
+\begin{myproof}
+По решению выполняется $c \mathit{R} i_{1}$, где $c$ --- кластер соседей, поэтому $\exists$ $i_0:$ $i_0 \mathit{R} i_{1}$.
+\end{myproof}
+
+По утверждению ОРС \ref{assertORS1} выполняется отношение $i_0 \mathit{R} i_{\times}$. Если отношение $\mathit{R}$ транзитивно
+на множестве $I$, то $i_0 \mathit{R} i_{1}$ $\wedge$ $i_0 \mathit{R} i_{\times}$ $\Rightarrow$ $i_1 \mathit{R} i_{\times}$.
+Так как выполняется транзитивность, то получаем, что $\forall$ $i_1$ $\exists$ $i_{\times} \mathit{R} i_1$. 
+Поэтому $r(n) = 1$ для $n=1..N$, из чего следует, что $\mathcal{E}_{\top} = 0$, то есть $\mathcal{E}_{\top} \le \epsilon_0$ для любых $\epsilon_0 \in [0,1]$. 
+
+\subsection{Необходимые условия объективного применения $\mathcal{E}_{\top}$}
+%% ОРС основаны на эвристических утверждениях, которые выносят предположение относительно
+%% оценки сходства  пользователя и объекта, исходя из схожести только объектов и без введения
+%% соответствующей оценки сходства с область определения $U \times T$. Это и является основной причиной проблем, которые будут описаны.
+%% Вместо того, чтобы производить непосредственно рассчет $\delta(a,i_{\times})$ РС производят косвенные рассчеты, в основу которых
+%% заложена недоказуемая эвристика.
+
+Напомним, что целевая задача $\top$ состоит в построении $I^a_{\otimes} = \{ (i_{\otimes}, \delta(a, i_{\otimes})) |  a \mathbf{R} i_{\otimes} \}$.
+Таким образом, по отношению к задаче $\top$, решение $I^a_{\otimes}$ эффективно, если 
+\begin{equation}
+|\{ i_{\otimes} \in I^a_{\otimes} | a \mathbf{R} i_{\otimes} \}| \rightarrow N
+\end{equation}
+Назовем {\it целевой} оценкой эффективности решения задачи $\top$ слдующую функцию:
+\begin{equation}
+\mathcal{E}_A = f_A (|\{ a \mathbf{R} i_{\otimes} \}|)
+\end{equation}
+
+Для использования $\mathcal{E}_{\top}$ в качестве
+оценки эффективности необходимо, чтобы выполнялись следующие условия:
+
+\begin{equation}\label{etop-use1}
+\mathcal{E}_{\top} < \varepsilon_0 \Rightarrow \mathcal{E}_A < \varepsilon_0
+\end{equation}
+
+\begin{equation}\label{etop-use2}
+\mathcal{E}_A < \varepsilon_0 \Rightarrow \mathcal{E}_{\top} < \varepsilon_0 
+\end{equation}
+
+Проанализируем выполнение \ref{etop-use1}. Если решение эффективно по $\mathcal{E}_{\top}$, то 
+$\exists$ $I'_{\otimes} \subset I^a_{\otimes}, I'_{\otimes} = \{ (t^l_{\otimes}, \delta_{\otimes}(a, t^l_{\otimes}) |$ $\exists$ $i_{\times}: t^l_{\otimes} \mathbf{R} i_{\times} \}$, 
+$|I'_{\otimes}| = K \rightarrow N$. По данным задачи выполняется $a \mathbf{R} i_{\times}$, а по решению, о котором известно, что оно эффективно, --- 
+$i_{\otimes} \mathbf{R} i_{\times}$ для $i_{\otimes} \in I'_{\otimes}$. Поэтому, если выполняется утверждение ОРС, то выполняется отношение 
+$a \mathbf{R} i_{\otimes}$. Тогда $\mathcal{E}_A = \frac{N - K}{N}$, и если $K \rightarrow N$, то $\mathcal{E}_A \le \varepsilon_0$.
+
+Таким образом, мы вывели условие, при котором возможно использование $\mathcal{E}_{\top}$ в качестве оценки точности решения задачи $\top$:
+\begin{assert}
+Решение эффективно по оценке $\mathcal{E}_{\top}$, то оно эффективно и по целевой оценке $\mathcal{E}_A$, {\it если выполняется утверждение ОРС}.
+\end{assert}
+
+Однако было показано, что для любых входных данных {\it утверждение ОРС не выполняется }, поэтому 
+если решение эффективно по оценке $\mathcal{E}_{\top}$, то тогда оно эффективно и по целевой оценке $\mathcal{E}_A$ {\it не для любых} $I^a_{0}$ и
+$I^a_{\times}$:
+
+\begin{assert}
+$\mathcal{E}_{\top}$ может быть использовано для оценки эффективности тогда и только тогда, когда выполняется утверждение ОРС.
+\end{assert}
+
+Проанализируем выполнение \ref{etop-use2}. Решение эффективно по целевой оценке $\mathcal{E}_A$, если 
+$\exists$ $I'_{\otimes} \subset I^a_{\otimes}, I'_{\otimes} = \{ (t^l_{\otimes}, \delta_{\otimes}(a, i_{\otimes}) |  a \mathbf{R} i_{\otimes} \}$, $|I'_{\otimes}| = K \rightarrow N$.
+По данным задачи и по тому, что решение эффективно, выполняется, что:
+\begin{equation}
+ a \mathbf{R} i_{\times} \wedge a \mathbf{R} t^l_{\otimes}, l = 1..K
+\end{equation}
+Учитывая утверждение ОРС 1 и \ref{etop-use2}, на первый взгляд можно предположить выполнение транзитивности отношения сходства:
+$a \mathbf{R} i_{\times} \wedge a \mathbf{R} i_{\otimes}  \Rightarrow i_{\otimes} \mathbf{R} i_{\times}$.
+Выполнение транзитивности является здесь важным условием, в следствии которого будет выполняться отношение \ref{etop-use2}.
+Однако утверждение \ref{neodnorodost} показывает, что $i_{\otimes} \mathbf{R} i_{\times}$ может не выполняться, поэтому эффективное решение по $\mathcal{E}_A$ 
+может быть {\it неэффективно по оценке} $\mathcal{E}_{\top}$, если 
+$t^l_{\otimes} \in I'_{\otimes} \subset I^a_{\otimes}$: $\delta_{\otimes}(i_{\otimes}, i_{\times}) < \Delta$ и $|I'_{\otimes}| \rightarrow N$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+% Эффективность решения задачи прогнозирования в объектно-ориентированных РС
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Необходимое условие эффективности решения задачи прогнозирования в объектно-ориентированных РС}
+%\begin{assert}
+  %Необходимым условием эффективности решения является выполнение 
+	%транзитивности отношения сходства объектов на множестве $\mathcal{N}^{\times}$:
+%\begin{equation}\label{nec-cond-pred-ors}
+%Покажем, что $(\mathcal{E}_{\top} \le \epsilon_0) \Rightarrow (i_{\times} \mathit{R} i^1 \wedge i^1 \mathit{R} i^2  
+%\Rightarrow i^{2} \mathit{R} i_{\times})$
+%
+%\begin{myproof}
+%Докажем утверждение от обратного: $(\mathcal{E}_{\top} \le \epsilon_0) \Rightarrow (i_{\times} \mathit{R} i^1 \wedge i^1 \mathit{R} i^2  
+%\Rightarrow \delta_1(i^{2}, i_{\times}) \le \Delta)$
+%\end{myproof}
+%Будем предполагать, что решение эффективно и при этом транзитивность не выполняется. 
+%
+%Оценим значение оценки эффективности, для упрощения доказательства будем считать, что $|\mathcal{N}^{\times}| = 2$:\\
+%$\mathcal{E}_{p} = $ $\Bigg|$ $\delta_0(a, i_{\times}) - 
+%\Big( \frac{\delta_1(i_{\times}, i^1) \cdot \delta_0(a, i^1) + \delta_1(i_{\times}, i^2) \cdot \delta_0(a, i^2)}
+%{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)} \Big)$ $\Bigg| = $, где второй член разности --- это значение 
+%прогнозной функции. \\ .
+%
+%Перепишем значение функции как $\frac{\delta_1(i_{\times}, i^1) \cdot \Big( \delta_0(a, i^1) - \delta_0(a, i_{\times})\Big) + 
+%\delta_1(i_{\times}, i^2) \cdot \Big( \delta_0(a, i^2) - \delta_0(a, i_{\times})\Big)}
+%{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)}$.
+%
+%Так транзитивность не выполняется, то есть $\delta_1(i^{2}, i_{\times}) \le \Delta$, то $i^1$ и $i^2$ не схожи.
+%По утверждению ОРС 2\ref{assertORS2} , так как $i^1$ и $i^2$ не схожи получим, что $|\delta_0(a,i_{\times}) - \delta_0(a,i^2)| > \epsilon_0$.
+%
+%Так как $i^1 \mathit{R} i^2$, то по утверждению ОРС 2 \ref{assertORS2} выполняется, что 
+%$|\delta_0(a,i_{\times}) - \delta_0(a,i^1)| \le \epsilon_0$
+%
+%$\mathcal{E}_{p} > \frac{\epsilon_0 \cdot \Big( \delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2) \Big)}{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)} = \epsilon_0$
+
+\subsection{Достаточное условие эффективности решения задачи прогнозирования}
+\begin{assert}
+  Достаточным условием эффективности решения является выполнение 
+	транзитивности отношения сходства объектов на множестве $\mathcal{N}^{\times}$:
+\begin{equation}\label{suff-cond-pred-ors}
+i_{\times} \mathbf{R} i^1 \wedge i_{\times} \mathit{R} i^2  \Rightarrow i^1 \mathbf{R} i^2, i^m \in \mathcal{N}^{\times}
+\end{equation}
+\end{assert}
+
+Покажем, что $(i_{\times} \mathbf{R} i^1 \wedge i_{\times} \mathbf{R} i^2) \Rightarrow (\mathcal{E}_{p} \le \epsilon_0)$
+
+% IoDo: доказываю наоборот - достаточность. Надо необходимость, то есть 
+% оттулкнуться от от эффектиновсти
+\begin{myproof}
+Рассмотрим доказательство для $\mathcal{N}^{\times} = \{i^1,i^2\}$. 
+\end{myproof}
+
+%% Пусть утверждение неверно и транзитивность не выполняется, то есть:
+%% $a \mathbf{R} u^1 \wedge a \mathbf{R} u^2 \Rightarrow \delta_1(u^1, u^2) \le \Delta$. Левая часть 
+%% $a \mathbf{R} u^1 \wedge a \mathbf{R} u^2$ выполняется по схеме решения.
+
+Оценим значение оценки эффективности, для упрощения доказательства будем считать, что $|\mathcal{N}^{\times}| = 2$:\\
+$\mathcal{E}_{p} = $ $\Bigg|$ $\delta_0(a, i_{\times}) - 
+\Big( \frac{\delta_1(i_{\times}, i^1) \cdot \delta_0(a, i^1) + \delta_1(i_{\times}, i^2) \cdot \delta_0(a, i^2)}
+{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)} \Big)$ $\Bigg| = $, где второй член разности --- это значение 
+прогнозной функции. \\ .
+
+
+
+
+$\frac{\delta_1(i_{\times}, i^1) \cdot \Big( \delta_0(a, i^1) - \delta_0(a, i_{\times})\Big) + 
+\delta_1(i_{\times}, i^2) \cdot \Big( \delta_0(a, i^2) - \delta_0(a, i_{\times})\Big)}
+{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)}$. Так выполняется транзитивность, то
+$i_{\times} \mathit{R} i^1$ $\wedge$ $i_{\times} \mathit{R} i^2$, а, по утверждению ОРС 2 \ref{assertORS2} выполняется, 
+что $|\delta_0(a,i_{\times}) - \delta_0(a,i^1)| \le \epsilon_0$ $\wedge$ $|\delta_0(a,i_{\times}) - \delta_0(a,i^2)| \le \epsilon_0$, 
+поэтому $\mathcal{E}_{p} \le \frac{\epsilon_0 \cdot \Big( \delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2) \Big)}{\delta_1(i_{\times}, i^1) + \delta_1(i_{\times}, i^2)} = \epsilon_0$
+
+
+
+%\subsubsection{Эффективность решения задачи прогнозирования в объектно-ориентированных РС}
+%\begin{assert}
+  %Достаточным условием эффективности решения является выполнение 
+	%транзитивности отношения сходства объектов на множестве $\mathcal{N}^{\times}$:
+%\begin{equation}\label{suff-cond-pred-ors}
+
+%\begin{assert}\label{trans-assert2}
+%Решение задачи прогнозирования заключается в формирования множества соседей прогнозируемого объекта. Следуя эвристическому утверждению ОРС 2 
+%\ref{assertORS2}, необходимым условием эффективности решения задачи прогнозирования является 
+%выполнение транзитивности отношения сходства объектов на множестве соседей прогнозируемого объекта $\mathcal{N}^t$ 
+%и между прогнозируемым объектом:
+%%ToDo: раписать \этот пункт
+%\begin{equation}\label{trans2}
+%i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2  \Rightarrow t^1 \mathbf{R} t^2
+%\end{equation}
+%\end{assert}
+%Так как при выполнении этого условия можно рассчитывать, что $|\delta(a,t^1) - \delta(a,t^2)| \in \varepsilon(0)$, и, следовательно,
+%прогнозное значение будет мало отличаться от реального.
+%
+%Покажем, что $(\mathcal{E}_{p} \le \varepsilon_0) \Rightarrow \forall t^1,t^2,t^3  \in \mathcal{N}$ 
+%$i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2  \Rightarrow t^1 \mathbf{R} t^2$
+%
+%Решение задачи прогнозирования эффективно, если $|\delta_{\otimes}(a,i_{\times}) - \delta(a,i_{\times})| \in \varepsilon(0)$.
+%$\delta_{\otimes}(a,i_{\times})$ является значением некоторой прогнозной функции, которая рассчитывается от значений оценок сходства, которые были
+%поставлены $t^i \in \mathcal{N}^t$, где $\mathcal{N}^t$ --- множество соседей объекта $i_{\times}$. Пусть не выполняется условие транзитивности \ref{trans2},
+%тогда получим, что $i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2 \Rightarrow \delta_{\otimes}(t^1, t^2) \le \Delta$. Тогда получим, что
+%$|\delta_{\otimes}(a,t^1) - \delta(a,t^2)| \not \in \varepsilon(0)$, что верно по утверждени ОРС 2 \ref{assertORS2}. 
+%Так как оценки активного пользователя на объекты $t^1$ и $t^2$ существенно различаются, то общая прогнозная оценка от оценок 
+%$\{ \delta(a,t^1),\delta(a,t^2) \}$ увеличит свою погрешность.
+%\begin{myproof}
+%Пусть утверждение \ref{trans-assert2} неверно, то есть $(\mathcal{E}_{p} \le \varepsilon_0) \Rightarrow $
+%$i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2   \Rightarrow \delta_{\otimes}(t^1, t^2) \le \Delta$. Рассмотрим значение, которое примет в 
+%таком случае функция прогнозирования \ref{fpredict-ors}: 
+%$\frac{\delta_{\otimes}(t^1,i_{\times}) \cdot \delta(a,t^1) + \delta_{\otimes}(t^2,i_{\times}) \cdot \delta(a,t^2)}
+%{\delta_{\otimes}(t^1,i_{\times}) + \delta_{\otimes}(t^2,i_{\times})}$. Рассмотрим значение оценки эффективности:
+%
+%$|\frac{\delta_{\otimes}(t^1,i_{\times}) \cdot \delta(a,t^1) + \delta_{\otimes}(t^2,i_{\times}) \cdot \delta(a,t^2)}
+%{\delta_{\otimes}(t^1,i_{\times}) + \delta_{\otimes}(t^2,i_{\times})} - \delta(a,i_{\times})| = $\\
+%$
+%|\frac{
+%\delta_{\otimes}(t^1,i_{\times}) \cdot (\delta(a,t^1) - \delta(a,i_{\times})) + 
+%\delta_{\otimes}(t^2,i_{\times}) \cdot (\delta(a,t^2) - \delta(a,i_{\times}))}
+%{\delta_{\otimes}(t^1,i_{\times}) + \delta_{\otimes}(t^2,i_{\times})}|$. Так как $i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2$, 
+%то по эвристическому утверждению ОРС 2 \ref{assertORS2} получим, что: $|\delta(a,t^1) - \delta(a,i_{\times})| \in \varepsilon(0)$ и 
+%$|\delta(a,t^2) - \delta(a,i_{\times})| \in \varepsilon(0)$. Соотвественно, величины разница между величинами $\delta(a,t^1)$ и $\delta(a,t^2)$ мала, то есть
+%$|\delta(a,t^1) - \delta(a,t^2)| \in \varepsilon(0)$. Тогда по эвристическому утверждению ОРС 2 \ref{assertORS2} получим, что $t^1 \mathbf{R} t^2$.
+%Получаем противоречие с условием, которое было выдвинуто в доказательстве о том, что: 
+%$(\mathcal{E}_{p} \le \varepsilon_0) \Rightarrow $
+%$i_{\times} \mathbf{R} t^1 \wedge i_{\times} \mathbf{R} t^2   \Rightarrow \delta_{\otimes}(t^1, t^2) \le \Delta$
+%\end{myproof}
